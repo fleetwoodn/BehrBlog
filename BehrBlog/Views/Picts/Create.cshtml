@@ -56,7 +56,8 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @*@Html.ActionLink("Back to List", "Index")*@
+    @Html.ActionLink("Back to Post Edit", "Edit","Main", new { id = ViewBag.aId })
 </div>
 
 @section Scripts {

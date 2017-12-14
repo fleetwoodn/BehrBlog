@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BehrBlog.ViewModels
 {
-    public class FinalDetailViewModel
+    public class MainDetailViewModel
     {
         //Posts
         public int ID { get; set; }

@@ -36,8 +36,10 @@ namespace BehrBlog.Controllers
         }
 
         // GET: Picts/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
+            ViewBag.aId = id;
+
             return View();
         }
 
@@ -46,13 +48,16 @@ namespace BehrBlog.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,PostFK,PicTitle,EditDate,PictPict")] Picts picts)
+        public ActionResult Create([Bind(Include = "ID,PostFK,PicTitle,EditDate,PictPict")] Picts picts, int id)
         {
             if (ModelState.IsValid)
             {
+                picts.PostFK = id;
+
                 db.Picts.Add(picts);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                
+                return RedirectToAction("Main","Edit", new { id = id });
             }
 
             return View(picts);

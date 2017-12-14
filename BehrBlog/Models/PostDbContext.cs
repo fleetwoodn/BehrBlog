@@ -13,6 +13,6 @@ namespace BehrBlog.Models
         public DbSet<Posts> Posts { get; set; }
         public DbSet<Picts> Picts { get; set; }
 
-        public System.Data.Entity.DbSet<BehrBlog.ViewModels.FinalDetailViewModel> FinalDetailViewModels { get; set; }
+        public System.Data.Entity.DbSet<BehrBlog.ViewModels.MainDetailViewModel> FinalDetailViewModels { get; set; }
     }
 }
