@@ -5,62 +5,86 @@
 }
 
 <h2>Details</h2>
+<h4>MainDetailViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <div>           
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.PostTitle)
+                </dt>
 
-<div>
-    <h4>MainDetailViewModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.PostTitle)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.PostTitle)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.PostTitle)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.PostAuthor)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PostAuthor)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.PostAuthor)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.PostAuthor)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.PostTags)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PostTags)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.PostTags)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.PostTags)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.PostText)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PostText)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.PostText)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.PostText)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.TitlePic)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TitlePic)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.TitlePic)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.TitlePic)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.EditDate)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.EditDate)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.EditDate)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.EditDate)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </div>
+    <div class="col-md-4">
+        <table class="table">
+            @foreach (var item in Model.Picts)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PicTitle)
+                    </td>
+                    <td>
+                        <img src="~/UploadPictures/@(item.PictPict)" style="max-width:200px" />
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    </td>
+                </tr>
+            }
+            </table>
+        </div>
+    </div>
+    <div>
+        @Html.ActionLink("Add Picture", "Create", "Picts", new { fkid = Model.ID }, null)
+    </div>

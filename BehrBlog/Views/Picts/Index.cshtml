@@ -7,8 +7,14 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+    @*@Html.ActionLink("Create New", "Create")*@
+    @using (Html.BeginForm())
+    {
+    }
+
+    <p>
+        Post ID: @Html.TextBox("SearchString") <br />
+    </p>
 <table class="table">
     <tr>
         <th>
@@ -42,7 +48,7 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @*@Html.ActionLink("Details", "Details", new { id=item.ID }) |*@
             @Html.ActionLink("Delete", "Delete", new { id=item.ID })
         </td>
     </tr>

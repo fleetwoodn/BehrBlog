@@ -7,11 +7,10 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BehrBlog.Models;
-using BehrBlog.ViewModels;
 
 namespace BehrBlog.Controllers
 {
-    public class MainController : Controller
+    public class FinalAuthController : Controller
     {
         private PostDbContext db = new PostDbContext();
 
@@ -31,46 +30,19 @@ namespace BehrBlog.Controllers
             return View(db.Posts.ToList());
         }
 
-        //extra 
-        public ActionResult Extra()
-        {
-            return View();
-        }
-
         // GET: Posts/Details/5
         public ActionResult Details(int? id)
         {
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //Posts posts = db.Posts.Find(id);
-            //if (posts == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            //return View(posts);
-
-            Posts posts = db.Posts.Find(id);
-
-            var qPict = db.Picts.Where(q => q.PostFK == id).ToList();
-
-            var viewModel = new MainDetailViewModel
+            if (id == null)
             {
-                ID = posts.ID,
-                PostTitle = posts.PostTitle,
-                PostAuthor = posts.PostAuthor,
-                PostTags = posts.PostTags,
-                PostText = posts.PostText,
-                TitlePic = posts.TitlePic,
-                EditDate = posts.EditDate,
-
-                Picts = qPict,
-
-            };
-
-            return View(viewModel);
-
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Posts posts = db.Posts.Find(id);
+            if (posts == null)
+            {
+                return HttpNotFound();
+            }
+            return View(posts);
         }
 
         // GET: Posts/Create
@@ -87,6 +59,8 @@ namespace BehrBlog.Controllers
         public ActionResult Create([Bind(Include = "ID,PostTitle,PostAuthor,PostTags,PostText,TitlePic,EditDate")] Posts posts)
         {
 
+            
+
             if (ModelState.IsValid)
             {
                 String aDate = DateTime.UtcNow.ToString("yyMMddHHmmss");
@@ -94,24 +68,10 @@ namespace BehrBlog.Controllers
 
                 db.Posts.Add(posts);
                 db.SaveChanges();
-
-                //grab id for new record
-
-                //Posts posts = db.Posts.
-
-                //int aId = int.Parse(db.Posts
-                //    .OrderByDescending(b => b.ID)
-                //    .Select(c => c.ID)
-                //    .First()
-                //    .ToString());
-
-                int aId = posts.ID;
-
-                //return RedirectToAction("Index");
-                return RedirectToAction("Edit", new { id = aId });
+                return RedirectToAction("Index");
             }
 
-            //nn to drive to edit action...fuck fuck fuck --- done done done motherfucker
+            //nn to drive to edit action...fuck fuck fuck
 
             return View(posts);
         }
@@ -128,9 +88,6 @@ namespace BehrBlog.Controllers
             {
                 return HttpNotFound();
             }
-
-            ViewBag.aId = id;
-
             return View(posts);
         }
 
@@ -175,12 +132,6 @@ namespace BehrBlog.Controllers
         {
             Posts posts = db.Posts.Find(id);
             db.Posts.Remove(posts);
-
-            //delete the pictures too (how??? fk == id
-
-            //Picts picts = db.Picts.Where(j => j.PostFK == id);
-            //db.Picts.Remove(picts);
-
             db.SaveChanges();
             return RedirectToAction("Index");
         }
