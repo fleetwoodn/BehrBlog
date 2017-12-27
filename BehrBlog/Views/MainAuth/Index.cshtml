@@ -4,10 +4,6 @@
     ViewBag.Title = "Index";
 }
 
-@*
-    Comments
-    -on the final, we should remove or modify the edit date
-*@
 <h2>Index</h2>
 
 <p>
@@ -20,7 +16,7 @@
         <input type="submit" value="Filter" />
     </p>
     }
-    
+
     <table class="table">
         <tr>
             <th>
@@ -31,6 +27,12 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.PostTags)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostText)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TitlePic)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.EditDate)
@@ -51,10 +53,18 @@
                     @Html.DisplayFor(modelItem => item.PostTags)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.PostText)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TitlePic)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.EditDate)
                 </td>
                 <td>
-                    @Html.ActionLink("Open", "Details", new { id = item.ID })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
                 </td>
             </tr>
         }

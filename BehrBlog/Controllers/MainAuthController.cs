@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
+
+using System.Data;
+using System.Data.Entity;
+
+using System.Net;
+
 using BehrBlog.Models;
 using BehrBlog.ViewModels;
 
 namespace BehrBlog.Controllers
 {
-    public class MainController : Controller
+    public class MainAuthController : Controller
     {
         private PostDbContext db = new PostDbContext();
 
@@ -102,7 +105,7 @@ namespace BehrBlog.Controllers
                 int aId = posts.ID;
 
                 //return RedirectToAction("Index");
-                return RedirectToAction("Details", new { id = aId });
+                return RedirectToAction("Edit", new { id = aId });
             }
 
             //nn to drive to edit action...fuck fuck fuck --- done done done motherfucker
@@ -137,15 +140,12 @@ namespace BehrBlog.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 String aDate = DateTime.UtcNow.ToString("yyMMddHHmmss");
                 posts.EditDate = aDate;
 
-                int aId = posts.ID;
-
                 db.Entry(posts).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Details", new { id = aId });
+                return RedirectToAction("Index");
             }
             return View(posts);
         }

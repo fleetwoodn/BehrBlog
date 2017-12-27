@@ -88,7 +88,7 @@ namespace BehrBlog.Controllers
 
                 int fkid = picts.PostFK;
 
-                return RedirectToAction("Edit","Main", new { id = fkid });
+                return RedirectToAction("Details","Main", new { id = fkid });
                 //return RedirectToAction("Index");
             }
 
@@ -148,6 +148,8 @@ namespace BehrBlog.Controllers
         {
             Picts picts = db.Picts.Find(id);
 
+            int fkid = picts.ID;
+
             string fullPath = Request.MapPath("~/Images/Cakes/" + picts.PictPict);
             if (System.IO.File.Exists(fullPath))
             {
@@ -158,8 +160,8 @@ namespace BehrBlog.Controllers
             db.SaveChanges();
 
 
-
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Main", new { id = fkid });
+            //return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
